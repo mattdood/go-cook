@@ -1,6 +1,11 @@
 package run
 
-type Command struct {
+import (
+    "fmt"
+)
 
+func Create(title string) {
+
+    fmt.Println("Hello from the command.go file: ", title)
 }
 
