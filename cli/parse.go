@@ -1,6 +1,8 @@
 package cli
 
 import (
+    "errors"
+    "fmt"
     "flag"
 
     "github.com/mattdood/go-cook/run"
@@ -22,7 +24,13 @@ func NewCreateCommand() *CreateCommand {
 }
 
 func (cc *CreateCommand) ParseFlags(args []string) error {
-    return cc.fs.Parse(args)
+    err := cc.fs.Parse(args)
+
+    if len(cc.title) == 0 && err != flag.ErrHelp {
+        return errors.New("Length of -title flag must be >0 characters")
+    }
+
+    return err
 }
 
 func (cc *CreateCommand) Run() int {
@@ -47,7 +55,17 @@ func ParseAndRun(command CommandArgs) int {
     // Determine cmd that was passed, init,
     // then run
     cmd := cmds[command.name]
-    cmd.ParseFlags(command.args)
+    err := cmd.ParseFlags(command.args)
+
+    switch {
+    // Usage information for flags is enabled by default
+    // if we pass on the `flag.ErrHelp` during arg parsing
+    case err == flag.ErrHelp:
+        return 0
+    case err != nil:
+        fmt.Println(err.Error())
+        return 2
+    }
 
     return cmd.Run()
 }

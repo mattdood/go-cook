@@ -1,5 +1,21 @@
 package cli
 
+import (
+    "fmt"
+)
+
+const usage = `
+go-cook [OPTION] [args...]
+
+Options:
+    -h, --help display this help
+
+Executes various commands to manipulate cooking templates defined
+in YAML format.
+
+Example:
+$ go-cook create -title "my-recipe-name"`
+
 // Name is always the first arg, use to discover
 // command to run. Flags are the rest
 type CommandArgs struct {
@@ -11,7 +27,8 @@ type CommandArgs struct {
 // appropriate command, return exit call
 // of the given command
 func Run(args []string) int {
-    if len(args) < 1 {
+    if len(args) <= 1 {
+        fmt.Println(usage)
         return 1
     }
 
@@ -19,6 +36,7 @@ func Run(args []string) int {
         name: args[1],
         args: args[2:],
     }
-    return ParseAndRun(command) // placeholder
+
+    return ParseAndRun(command)
 }
 
