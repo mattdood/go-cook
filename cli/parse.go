@@ -2,8 +2,9 @@ package cli
 
 import (
     "errors"
-    "fmt"
     "flag"
+    "fmt"
+    "strings"
 
     "github.com/mattdood/go-cook/run"
 )
@@ -28,6 +29,10 @@ func (cc *CreateCommand) ParseFlags(args []string) error {
 
     if len(cc.title) == 0 && err != flag.ErrHelp {
         return errors.New("Length of -title flag must be >0 characters")
+    }
+
+    if len(cc.template) == 0 && err != flag.ErrHelp {
+        return errors.New("Length of -template flag must be >0 characters (select a template)")
     }
 
     return err
