@@ -13,6 +13,7 @@ import (
 type CreateCommand struct {
     fs *flag.FlagSet
     title string
+    template string
 }
 
 func NewCreateCommand() *CreateCommand {
@@ -20,6 +21,7 @@ func NewCreateCommand() *CreateCommand {
         fs: flag.NewFlagSet("create", flag.ContinueOnError),
     }
     cc.fs.StringVar(&cc.title, "title", "", "Title for the template")
+    cc.fs.StringVar(&cc.template, "template", "", "Template type (recipe or tip)")
 
     return cc
 }
