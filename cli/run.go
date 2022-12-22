@@ -30,17 +30,17 @@ func Run(args []string) int {
 
     // args are:
     // [/tmp/go-build-dir <cmd flag>]
-    if len(args) > 1{
+    if len(args) < 1 {
+        fmt.Println("Unknown command. Use -h, -help, or --help to display help")
+        return 1
+    }
+    if len(args) > 1 && len(args) < 3 {
         for _, arg := range args {
-            fmt.Println(arg)
             if arg == "-h" || arg == "-help" || arg == "--help" {
                 fmt.Println(usage)
                 return 1
             }
         }
-    } else {
-        fmt.Println("Unknown command. Use -h, -help, or --help to display help")
-        return 1
     }
 
     command := CommandArgs{
