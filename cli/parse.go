@@ -21,7 +21,10 @@ func CommandUsage(fs *flag.FlagSet, name string) {
     // If more custom usage is needed we can parse
     // the command name to preset messages
     fs.Usage = func() {
-        fmt.Println("Wraps `git %d`, takes no arguments. Only operates on `cook` directory.", name)
+        fmt.Printf(
+            "Wraps `git %s`, takes no arguments. Only operates on `cook` directory.\n",
+            name,
+        )
     }
 }
 
