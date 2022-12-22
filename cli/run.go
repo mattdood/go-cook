@@ -31,7 +31,6 @@ func Run(args []string) int {
     // args are:
     // [/tmp/go-build-dir <cmd flag>]
     if len(args) > 1{
-        fmt.Println(args)
         for _, arg := range args {
             fmt.Println(arg)
             if arg == "-h" || arg == "-help" || arg == "--help" {

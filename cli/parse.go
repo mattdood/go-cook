@@ -17,8 +17,12 @@ func (fs *arrayFlag) String() string {
 }
 
 // Custom Usage() override for flags with no arguments
-func Usage(name string) {
-    fmt.Println("Wraps `git %d`, takes no arguments. Only operates on `cook` directory.", name)
+func CommandUsage(fs *flag.FlagSet, name string) {
+    // If more custom usage is needed we can parse
+    // the command name to preset messages
+    fs.Usage = func() {
+        fmt.Println("Wraps `git %d`, takes no arguments. Only operates on `cook` directory.", name)
+    }
 }
 
 // Accepts space separated list of values
@@ -106,7 +110,7 @@ func NewInitCommand() *InitCommand {
     ic := &InitCommand{
         fs: flag.NewFlagSet("init", flag.ContinueOnError),
     }
-    ic.fs.Usage = Usage(ic.fs.Name)
+    CommandUsage(ic.fs, ic.fs.Name())
 
     return ic
 }
@@ -135,6 +139,7 @@ func NewPushCommand() *PushCommand {
     pc := &PushCommand{
         fs: flag.NewFlagSet("push", flag.ContinueOnError),
     }
+    CommandUsage(pc.fs, pc.fs.Name())
 
     return pc
 }
@@ -163,6 +168,7 @@ func NewPullCommand() *PullCommand {
     pc := &PullCommand{
         fs: flag.NewFlagSet("pull", flag.ContinueOnError),
     }
+    CommandUsage(pc.fs, pc.fs.Name())
 
     return pc
 }
