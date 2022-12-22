@@ -188,39 +188,6 @@ func (pc *PullCommand) Run() int {
     return 0
 }
 
-// TODO:
-// - Figure out git subcommands and a choice constant
-// - Determine how sub commands are typically parsed out
-// - Wrap git subcommands for add, commit, push, pull
-type GitCommand struct {
-    fs *flag.FlagSet
-    subcommand string
-}
-
-func NewGitCommand() *GitCommand {
-    gc := &GitCommand{
-        fs: flag.NewFlagSet("git", flag.ContinueOnError),
-    }
-    gc.fs.StringVar(&gc.subcommand, "subcommand", "", "Name of the Git subcommand to run")
-
-    return gc
-}
-
-func (gc *GitCommand) ParseFlags(args []string) error {
-    err := gc.fs.Parse(args)
-
-    if len(gc.subcommand) == 0 && err != flag.ErrHelp {
-        return errors.New("Length of the -subcommand flag must be >0 characters")
-    }
-
-    return err
-}
-
-func (gc *GitCommand) Run() int {
-    run.Git(gc.subcommand)
-    return 0
-}
-
 // Runner interface that passes all
 // command functions
 type Runner interface {
