@@ -1,15 +1,17 @@
 package run
 
 import (
+    "errors"
     "fmt"
     "os"
     "os/exec"
+    "path"
     "strings"
 )
 
 var (
     OutputBaseDirectory string = getUserHome()
-    OutputDirectory string = OutputBaseDirectory + InstallBaseDirectory
+    OutputDirectory string = path.Join(OutputBaseDirectory, InstallBaseDirectory)
 )
 
 const (
@@ -39,18 +41,22 @@ func Add(files []string) {
         fmt.Println(err)
     }
     output := string(out[:])
-    fmt.Println(output)
+    fmt.Print(output)
 }
 
 // Git command wrapper for `git init`
 func Init() {
+    if _, err := os.Stat(OutputDirectory); errors.Is(err, os.ErrNotExist) {
+        os.Mkdir(OutputDirectory, 0775)
+    }
+
     out, err := exec.Command("git", "init", OutputDirectory).Output()
     if err != nil {
         fmt.Println("`git init` exited abnormally")
         fmt.Println(err)
     }
     output := string(out[:])
-    fmt.Println(output)
+    fmt.Print(output)
 }
 
 // Git command wrapper for `git push`
@@ -61,7 +67,7 @@ func Push() {
         fmt.Println(err)
     }
     output := string(out[:])
-    fmt.Println(output)
+    fmt.Print(output)
 }
 
 // Git command wrapper for `git pull`
@@ -72,5 +78,5 @@ func Pull() {
         fmt.Println(err)
     }
     output := string(out[:])
-    fmt.Println(output)
+    fmt.Print(output)
 }
