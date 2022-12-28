@@ -1,0 +1,13 @@
+{{/* Template to create a cooking tip file */}}
+type: recipe
+timestamp: {{.timestamp}}
+title: {{.title}}
+category: {{.category}}
+tags:
+  {{range tag := .tags}}
+  - {{tag}}
+  {{end}}
+
+instructions:
+  -
+

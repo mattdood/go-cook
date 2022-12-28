@@ -1,0 +1,20 @@
+{{/* Template to create a recipe file */}}
+type: recipe
+timestamp: {{.timestamp}}
+title: {{.title}}
+category: {{.category}}
+tags:
+  {{range tag := .tags}}
+  - {{tag}}
+  {{end}}
+
+yield:
+
+ingredients:
+  - name:
+    quantity:
+    unit:
+
+instructions:
+  -
+
