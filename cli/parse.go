@@ -40,6 +40,8 @@ func (fs *arrayFlag) Set(value string) error {
 type CreateCommand struct {
     fs *flag.FlagSet
     title string
+    category string
+    tags arrayFlag
     template string
 }
 
@@ -48,6 +50,8 @@ func NewCreateCommand() *CreateCommand {
         fs: flag.NewFlagSet("create", flag.ContinueOnError),
     }
     cc.fs.StringVar(&cc.title, "title", "", "Title for the template")
+    cc.fs.StringVar(&cc.category, "category", "", "Category for the template")
+    cc.fs.Var(&cc.tags, "tags", "Tags for the template as a space separated list")
     cc.fs.StringVar(&cc.template, "template", "", "Template type (recipe or tip)")
 
     return cc
@@ -58,6 +62,14 @@ func (cc *CreateCommand) ParseFlags(args []string) error {
 
     if len(cc.title) == 0 && err != flag.ErrHelp {
         return errors.New("Length of -title flag must be >0 characters")
+    }
+
+    if len(cc.category) == 0 && err != flag.ErrHelp {
+        return errors.New("Length of -category flag must be >0 characters")
+    }
+
+    if len(cc.tags) == 0 && err != flag.ErrHelp {
+        return errors.New("Length of -tags flag must be >0 characters")
     }
 
     if len(cc.template) == 0 && err != flag.ErrHelp {
@@ -72,7 +84,12 @@ func (cc *CreateCommand) ParseFlags(args []string) error {
 }
 
 func (cc *CreateCommand) Run() int {
-    run.Create(cc.title, cc.template)
+    run.Create(
+        cc.title,
+        cc.category,
+        cc.tags,
+        cc.template,
+    )
     return 0
 }
 

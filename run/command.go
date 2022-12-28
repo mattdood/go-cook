@@ -16,7 +16,6 @@ var (
 
 const (
     InstallBaseDirectory string = "cook/"
-    TemplatesBaseDirectory string = "templates/"
 )
 
 func getUserHome() string {
@@ -27,7 +26,9 @@ func getUserHome() string {
     return homedir
 }
 
-func Create(title string, template string) {
+// TODO:
+//   * timestamp for template
+func Create(title string, category string, tags []string, template string) {
     fmt.Println("Hello from the command.go file: ", title)
 }
 
