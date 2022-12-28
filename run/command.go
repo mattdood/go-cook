@@ -2,6 +2,13 @@ package run
 
 import (
     "fmt"
+    "os/exec"
+    "strings"
+)
+
+const (
+    TemplatesBaseDirectory string = "templates/"
+    OutputBaseDirectory string = "~/cook/"
 )
 
 func Create(title string, template string) {
@@ -9,18 +16,46 @@ func Create(title string, template string) {
     fmt.Println("Hello from the command.go file: ", title)
 }
 
+// Git command wrapper for `git add`
 func Add(files []string) {
-    fmt.Println("Hello from the (git) add command: ", files)
+    out, err := exec.Command("git", "add", strings.Join(files, " ")).Output()
+    if err != nil {
+        fmt.Println("`git add` exited abnormally")
+        fmt.Println(err)
+    }
+    output := string(out[:])
+    fmt.Println(output)
 }
 
+// Git command wrapper for `git init`
 func Init() {
-    fmt.Println("Hello from the init command")
+    out, err := exec.Command("git", "init", OutputBaseDirectory).Output()
+    if err != nil {
+        fmt.Println("`git init` exited abnormally")
+        fmt.Println(err)
+    }
+    output := string(out[:])
+    fmt.Println(output)
 }
 
+// Git command wrapper for `git push`
 func Push() {
-    fmt.Println("Hello from the push command")
+    out, err := exec.Command("git", "push", OutputBaseDirectory).Output()
+    if err != nil {
+        fmt.Println("`git push` exited abnormally")
+        fmt.Println(err)
+    }
+    output := string(out[:])
+    fmt.Println(output)
 }
 
+// Git command wrapper for `git pull`
 func Pull() {
-    fmt.Println("Hello from the pull command")
+    out, err := exec.Command("git", "pull", OutputBaseDirectory).Output()
+    if err != nil {
+        fmt.Println("`git push` exited abnormally")
+        fmt.Println(err)
+    }
+    output := string(out[:])
+    fmt.Println(output)
 }

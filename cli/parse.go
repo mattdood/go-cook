@@ -93,7 +93,7 @@ func (ac *AddCommand) ParseFlags(args []string) error {
     err := ac.fs.Parse(args)
 
     if len(ac.files) == 0 && err != flag.ErrHelp {
-        return errors.New("Length of the -files flag must be >0 characters")
+        ac.files = append(ac.files, ".")
     }
 
     return err
