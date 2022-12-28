@@ -121,7 +121,7 @@ func NewInitCommand() *InitCommand {
 func (ic *InitCommand) ParseFlags(args []string) error {
     err := ic.fs.Parse(args)
 
-    if len(args) >= 0 && err != flag.ErrHelp {
+    if len(args) > 0 && err != flag.ErrHelp {
         return errors.New("This command takes no arguments")
     }
 
