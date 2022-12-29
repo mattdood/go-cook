@@ -49,8 +49,10 @@ func Create(title string, category string, tags []string, templateType string) i
     // Find template file to load
     var tmpl *template.Template
     var err error
+
     switch {
     case templateType == "recipe":
+        // Seems to need the "run/" due to it executing in main.go one level up?
         tmpl, err = template.ParseFiles("run/recipe.tmpl")
         if err != nil {
             fmt.Println("Error parsing `recipe.tmpl` template file: ", err)
