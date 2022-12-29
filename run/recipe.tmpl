@@ -1,13 +1,12 @@
-{{/* Template to create a recipe file */}}
+{{/* Template to create a recipe file */ -}}
 type: recipe
-timestamp: {{.timestamp}}
-title: {{.title}}
-category: {{.category}}
+timestamp: {{.Timestamp}}
+title: {{.Title}}
+category: {{.Category}}
 tags:
-  {{range tag := .tags}}
-  - {{tag}}
+  {{range $tag := .Tags -}}
+  - {{$tag}}
   {{end}}
-
 description:
 
 yield:
