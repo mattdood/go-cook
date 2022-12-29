@@ -120,10 +120,8 @@ func Create(title string, category string, tags []string, templateType string) i
 }
 
 // Git command wrapper for `git add`
-// TODO:
-//   * Should we check in the file path of each file for the `homedir/cook/` as a prefix then prepend?
 func Add(files []string) {
-    out, err := exec.Command("git", "add", strings.Join(files, " ")).Output()
+    out, err := exec.Command("git", "-C", OutputDirectory, "add", strings.Join(files, " ")).Output()
     if err != nil {
         fmt.Println("`git add` exited abnormally")
         fmt.Println(err)
@@ -138,7 +136,7 @@ func Init() {
         os.Mkdir(OutputDirectory, 0775)
     }
 
-    out, err := exec.Command("git", "init", OutputDirectory).Output()
+    out, err := exec.Command("git", "-C", OutputDirectory, "init").Output()
     if err != nil {
         fmt.Println("`git init` exited abnormally")
         fmt.Println(err)
@@ -149,7 +147,7 @@ func Init() {
 
 // Git command wrapper for `git push`
 func Push() {
-    out, err := exec.Command("git", "push", OutputDirectory).Output()
+    out, err := exec.Command("git", "-C", OutputDirectory, "push").Output()
     if err != nil {
         fmt.Println("`git push` exited abnormally")
         fmt.Println(err)
@@ -160,7 +158,7 @@ func Push() {
 
 // Git command wrapper for `git pull`
 func Pull() {
-    out, err := exec.Command("git", "pull", OutputDirectory).Output()
+    out, err := exec.Command("git", "-C", OutputDirectory, "pull").Output()
     if err != nil {
         fmt.Println("`git push` exited abnormally")
         fmt.Println(err)
