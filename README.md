@@ -13,9 +13,7 @@ cook --help
 
 ## TODO
 - [ ] CLI stencil
-- [ ] Create command
-- [ ] Template structure
 - [ ] CI/CD
-- [ ]
-- [ ]
-- [ ]
+- [ ] Lint
+- [ ] Packaging + Install
+- [ ] Readme
