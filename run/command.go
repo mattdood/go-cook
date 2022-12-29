@@ -76,7 +76,7 @@ func Create(title string, category string, tags []string, templateType string) i
     var outputPath string
     outputPath = path.Join(
         OutputDirectory,
-        templateType,
+        fmt.Sprintf("%ss", templateType),
         fmt.Sprintf("%d/%02d/%02d/", timestamp.Year(), timestamp.Month(), timestamp.Day()),
         timestamp.Format("20060102150405"),
         filename,
