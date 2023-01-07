@@ -33,16 +33,17 @@ func (fs *arrayFlag) Set(value string) error {
 	for _, file := range strings.Split(value, " ") {
 		*fs = append(*fs, file)
 	}
+
 	return nil
 }
 
 // Command types, each is required to have a FlagSet
 type CreateCommand struct {
-	fs       *flag.FlagSet
 	title    string
 	category string
-	tags     arrayFlag
 	template string
+	fs       *flag.FlagSet
+	tags     arrayFlag
 }
 
 func NewCreateCommand() *CreateCommand {
@@ -61,23 +62,23 @@ func (cc *CreateCommand) ParseFlags(args []string) error {
 	err := cc.fs.Parse(args)
 
 	if len(cc.title) == 0 && err != flag.ErrHelp {
-		return errors.New("Length of -title flag must be >0 characters")
+		return errors.New("length of -title flag must be >0 characters")
 	}
 
 	if len(cc.category) == 0 && err != flag.ErrHelp {
-		return errors.New("Length of -category flag must be >0 characters")
+		return errors.New("length of -category flag must be >0 characters")
 	}
 
 	if len(cc.tags) == 0 && err != flag.ErrHelp {
-		return errors.New("Length of -tags flag must be >0 characters")
+		return errors.New("length of -tags flag must be >0 characters")
 	}
 
 	if len(cc.template) == 0 && err != flag.ErrHelp {
-		return errors.New("Length of -template flag must be >0 characters (select a template)")
+		return errors.New("length of -template flag must be >0 characters (select a template)")
 	}
 
 	if cc.template != "tip" && cc.template != "recipe" {
-		return errors.New("Template type must be either recipe or tip")
+		return errors.New("template type must be either recipe or tip")
 	}
 
 	return err
@@ -90,6 +91,7 @@ func (cc *CreateCommand) Run() int {
 		cc.tags,
 		cc.template,
 	)
+
 	return 0
 }
 
@@ -143,7 +145,7 @@ func (ic *InitCommand) ParseFlags(args []string) error {
 	err := ic.fs.Parse(args)
 
 	if len(args) > 0 && err != flag.ErrHelp {
-		return errors.New("This command takes no arguments")
+		return errors.New("this command takes no arguments")
 	}
 
 	return err
@@ -172,7 +174,7 @@ func (pc *PushCommand) ParseFlags(args []string) error {
 	err := pc.fs.Parse(args)
 
 	if len(args) >= 0 && err != flag.ErrHelp {
-		return errors.New("This command takes no arguments")
+		return errors.New("this command takes no arguments")
 	}
 
 	return err
@@ -201,7 +203,7 @@ func (pc *PullCommand) ParseFlags(args []string) error {
 	err := pc.fs.Parse(args)
 
 	if len(args) >= 0 && err != flag.ErrHelp {
-		return errors.New("This command takes no arguments")
+		return errors.New("this command takes no arguments")
 	}
 
 	return err
@@ -220,7 +222,6 @@ type Runner interface {
 }
 
 func ParseAndRun(command CommandArgs) int {
-
 	// Register commands
 	cmds := map[string]Runner{
 		"create": NewCreateCommand(),
@@ -242,7 +243,7 @@ func ParseAndRun(command CommandArgs) int {
 		return 0
 	case err != nil:
 		fmt.Println(err.Error())
-		return 2
+		return 1
 	}
 
 	return cmd.Run()

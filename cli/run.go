@@ -27,13 +27,13 @@ type CommandArgs struct {
 // appropriate command, return exit call
 // of the given command
 func Run(args []string) int {
-
 	// args are:
 	// [/tmp/go-build-dir <cmd flag>]
 	if len(args) < 1 {
 		fmt.Println("Unknown command. Use -h, -help, or --help to display help")
 		return 1
 	}
+
 	if len(args) > 1 && len(args) < 3 {
 		for _, arg := range args {
 			if arg == "-h" || arg == "-help" || arg == "--help" {
