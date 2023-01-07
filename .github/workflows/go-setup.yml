@@ -1,0 +1,13 @@
+# Handles setting up code repository and Go in job steps
+jobs:
+
+  go-setup:
+    name: Go and Code Repo setup
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code Repository
+        uses: actions/checkout@v3
+
+      - name: Setup Go
+        uses: actions/setup-go@v3
+
