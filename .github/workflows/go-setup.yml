@@ -1,4 +1,9 @@
 # Handles setting up code repository and Go in job steps
+name: Golang and Code Repo setup, reusable workflow
+
+on:
+  workflow_call:
+
 jobs:
 
   go-setup:
