@@ -14,7 +14,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Go and Code Repo setup
-        uses: ./.github/workflows/go-setup.yml
+        uses: ./.github/workflows/go-setup.yaml
 
       - name: Fmt
         run: make fmt
@@ -24,7 +24,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Go and Code Repo setup
-        uses: ./.github/workflows/go-setup.yml
+        uses: ./.github/workflows/go-setup.yaml
 
       - name: Vet
         run: make vet
@@ -34,7 +34,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Go and Code Repo setup
-        uses: ./.github/workflows/go-setup.yml
+        uses: ./.github/workflows/go-setup.yaml
 
       - name: Golangci-lint
         uses: golangci/golangci-lint-action@v3
@@ -46,7 +46,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Go and Code Repo setup
-        uses: ./.github/workflows/go-setup.yml
+        uses: ./.github/workflows/go-setup.yaml
 
       - name: Test
         run: make test
