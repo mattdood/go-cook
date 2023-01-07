@@ -1,12 +1,11 @@
 package main
 
 import (
-    "os"
+	"os"
 
-    "github.com/mattdood/go-cook/cli"
+	"github.com/mattdood/go-cook/cli"
 )
 
 func main() {
-    os.Exit(cli.Run(os.Args))
+	os.Exit(cli.Run(os.Args))
 }
-
