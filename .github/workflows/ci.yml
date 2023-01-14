@@ -6,6 +6,8 @@ on:
   push:
     branches: ["master", "main"]
     paths-ignore: ["docs/**"]
+    tags-ignore:
+      - '**'
 
 jobs:
 

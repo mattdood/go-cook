@@ -1,0 +1,24 @@
+# Release Go binary on tag push
+name: Release binary
+
+on:
+  push:
+    tags:
+      - v*
+
+jobs:
+
+  release:
+    name: Release binary for new version
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: wangyoucao577/go-release-action@v1.35
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          goos: linux
+          goarch: amd64
+          binary_name: "cook"
+          extra_files: LICENSE README.md
+          release_tag: ${{ github.event.release.tag_name }}
+
