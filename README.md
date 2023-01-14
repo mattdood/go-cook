@@ -4,16 +4,20 @@ project is to organize and standardize cooking information that can be parsed
 to individual pages on a website.
 
 ## Installation
-TODO
+Ensure that you have a Golang version `>= 1.19`.
 
-## Usage
 ```bash
-cook --help
+make install
 ```
 
-## TODO
-- [ ] CLI stencil
-- [ ] CI/CD
-- [ ] Lint
-- [ ] Packaging + Install
-- [ ] Readme
+## Usage
+The CLI is meant to generate template files for recipes and tips, use the following:
+
+```bash
+go-cook --help
+```
+
+### File placement
+Files are created in the `~/cook/` directory, all `git` wrapper commands point
+to this directory exclusively.
+
