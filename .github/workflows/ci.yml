@@ -13,8 +13,11 @@ jobs:
     name: fmt
     runs-on: ubuntu-latest
     steps:
-      - name: Go and Code Repo setup
-        uses: ./.github/actions/go-setup
+      - name: Checkout Code Repository
+        uses: actions/checkout@v3
+
+      - name: Setup Go
+        uses: actions/setup-go@v3
 
       - name: Fmt
         run: make fmt
@@ -23,18 +26,24 @@ jobs:
     name: vet
     runs-on: ubuntu-latest
     steps:
-      - name: Go and Code Repo setup
-        uses: ./.github/actions/go-setup
+      - name: Checkout Code Repository
+        uses: actions/checkout@v3
+
+      - name: Setup Go
+        uses: actions/setup-go@v3
 
       - name: Vet
         run: make vet
 
   lint:
-    name: Lint
+    name: lint
     runs-on: ubuntu-latest
     steps:
-      - name: Go and Code Repo setup
-        uses: ./.github/actions/go-setup
+      - name: Checkout Code Repository
+        uses: actions/checkout@v3
+
+      - name: Setup Go
+        uses: actions/setup-go@v3
 
       - name: Golangci-lint
         uses: golangci/golangci-lint-action@v3
@@ -45,8 +54,11 @@ jobs:
     name: Test
     runs-on: ubuntu-latest
     steps:
-      - name: Go and Code Repo setup
-        uses: ./.github/actions/go-setup
+      - name: Checkout Code Repository
+        uses: actions/checkout@v3
+
+      - name: Setup Go
+        uses: actions/setup-go@v3
 
       - name: Test
         run: make test
