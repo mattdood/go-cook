@@ -77,7 +77,7 @@ func (cc *CreateCommand) ParseFlags(args []string) error {
 		return errors.New("length of -template flag must be >0 characters (select a template)")
 	}
 
-	if cc.template != "tip" && cc.template != "recipe" {
+	if cc.template != "tip" && cc.template != "recipe" && err != flag.ErrHelp {
 		return errors.New("template type must be either recipe or tip")
 	}
 
