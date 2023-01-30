@@ -10,11 +10,20 @@ go-cook [OPTION] [args...]
 Options:
     -h, -help, --help display this help
 
+Commands:
+    create      Generates a template
+
+    add         Wraps "git add"
+    commit      Wraps "git commit"
+    init        Wraps "git init"
+    pull        Wraps "git pull"
+    push        Wraps "git push"
+
 Executes various commands to manipulate cooking templates defined
 in YAML format.
 
 Example:
-$ go-cook create -title "my-recipe-name"`
+$ go-cook create -title "my-recipe-name" -category "dinners" -tags "beef rice quick" -type "recipe"`
 
 // Name is always the first arg, use to discover
 // command to run. Flags are the rest

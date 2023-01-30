@@ -158,6 +158,21 @@ func Init() {
 	fmt.Print(output)
 }
 
+// Git command wrapper for `git commit`
+func Commit(message string) int {
+	out, err := exec.Command("git", "-C", OutputDirectory, "commit", "-m", message).Output()
+	if err != nil {
+		fmt.Println("`git commit` exited abnormally: ", err)
+		return 1
+	}
+
+	output := string(out)
+
+	fmt.Print(output)
+
+	return 1
+}
+
 // Git command wrapper for `git push`
 func Push() {
 	out, err := exec.Command("git", "-C", OutputDirectory, "push").Output()

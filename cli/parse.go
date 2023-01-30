@@ -156,6 +156,33 @@ func (ic *InitCommand) Run() int {
 	return 0
 }
 
+// Git command wrapper for committing
+// files to be tracked
+// `git commit <arg>`
+type CommitCommand struct {
+	fs      *flag.FlagSet
+	message string
+}
+
+func NewCommitCommand() *CommitCommand {
+	cc := &CommitCommand{
+		fs: flag.NewFlagSet("commit", flag.ContinueOnError),
+	}
+	cc.fs.StringVar(&cc.message, "m", "", "Message for the git commit.")
+
+	return cc
+}
+
+func (cc *CommitCommand) ParseFlags(args []string) error {
+	err := cc.fs.Parse(args)
+	return err
+}
+
+func (cc *CommitCommand) Run() int {
+	run.Commit(cc.message)
+	return 0
+}
+
 // Git command wrapper for repo push
 type PushCommand struct {
 	fs *flag.FlagSet
@@ -225,7 +252,9 @@ func ParseAndRun(command CommandArgs) int {
 	// Register commands
 	cmds := map[string]Runner{
 		"create": NewCreateCommand(),
+
 		"add":    NewAddCommand(),
+		"commit": NewCommitCommand(),
 		"init":   NewInitCommand(),
 		"pull":   NewPullCommand(),
 		"push":   NewPushCommand(),
